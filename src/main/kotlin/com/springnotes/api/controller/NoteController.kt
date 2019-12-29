@@ -11,7 +11,6 @@ import java.util.*
 @RequestMapping("/notes")
 @EnableAutoConfiguration
 class NoteController {
-
     /**
      * Get notes
      **/
@@ -21,15 +20,13 @@ class NoteController {
     )
     fun getNotes(): List<Note> {
         return listOf(
-                Note(
-                        UUID.randomUUID().toString(),
-                        "My first note",
-                        "This is the mesage for the first note"
+                Note(id = UUID.randomUUID().toString(),
+                     title = "My first note",
+                     message = "This is the message for the first note"
                 ),
-                Note(
-                        UUID.randomUUID().toString(),
-                        "My second note",
-                        "There is a message for the second note"
+                Note(id = UUID.randomUUID().toString(),
+                     title = "My second note",
+                     message = "There is a message for the second note"
                 )
         )
     }
