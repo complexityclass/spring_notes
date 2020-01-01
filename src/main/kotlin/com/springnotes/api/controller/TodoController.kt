@@ -12,7 +12,6 @@ class TodoController {
      * Get Todo's
      */
     @GetMapping(
-            value = ["/obtain"],
             produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getTodos(): List<Todo> {
         return listOf(
@@ -31,7 +30,6 @@ class TodoController {
      * Insert item
      */
     @PutMapping(
-            value = ["/insert"],
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun insertTodo(@RequestBody todo: Todo): Todo {
@@ -43,7 +41,7 @@ class TodoController {
      * Delete mapping
      */
     @DeleteMapping(
-            value = ["delete/{id}"],
+            value = ["/{id}"],
             produces = [MediaType.APPLICATION_JSON_VALUE])
     fun deleteTodo(@PathVariable(name = "id") id: String): Boolean {
         println("Removing todo $id")
@@ -60,6 +58,7 @@ class TodoController {
     fun updateTodo(@RequestBody todo: Todo): Todo {
         todo.title += "+ [updated]"
         todo.message += "+ [updated]"
+        todo.schedule = System.currentTimeMillis()
         return todo
     }
 }

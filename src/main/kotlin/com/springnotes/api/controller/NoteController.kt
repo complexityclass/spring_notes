@@ -15,7 +15,6 @@ class NoteController {
      * Get notes
      **/
     @GetMapping(
-            value = ["/obtain"],
             produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun getNotes(): List<Note> {
@@ -35,7 +34,6 @@ class NoteController {
      * Insert note. It consumes JSON.
      **/
     @PutMapping(
-            value = ["/insert"],
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun insertNote(@RequestBody note: Note): Note {
@@ -47,7 +45,7 @@ class NoteController {
      * Delete note by Id
      * */
     @DeleteMapping(
-            value = ["/delete/{id}"],
+            value = ["/{id}"],
             produces = [MediaType.APPLICATION_JSON_VALUE])
     fun deleteNote(@PathVariable(name = "id") id: String): Boolean {
         print("Removing $id")
@@ -58,7 +56,6 @@ class NoteController {
      * Update item
      * */
     @PostMapping(
-            value = ["/update"],
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun updateNote(@RequestBody note: Note): Note {
