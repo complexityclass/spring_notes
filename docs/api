@@ -1,0 +1,14 @@
+### Get notes list
+ curl -k -X GET 
+  -H 'Content-Type: application/json'
+  http://localhost:9000/notes
+
+### Add note
+curl -k -X PUT
+ -H 'Content-Type: application/json'
+ -d 
+'{
+    "title": "New title", 
+    "message": "New message"
+}'
+ http://localhost:9000/notes
