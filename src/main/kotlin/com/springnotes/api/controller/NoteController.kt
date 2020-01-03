@@ -1,6 +1,8 @@
 package com.springnotes.api.controller
 
 import com.springnotes.api.data.Note
+import com.springnotes.api.service.NoteService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
@@ -11,24 +13,17 @@ import java.util.*
 @RequestMapping("/notes")
 @EnableAutoConfiguration
 class NoteController {
+
+    @Autowired
+    private lateinit var service: NoteService
+
     /**
      * Get notes
      **/
     @GetMapping(
             produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun getNotes(): List<Note> {
-        return listOf(
-                Note(id = UUID.randomUUID().toString(),
-                     title = "My first note",
-                     message = "This is the message for the first note"
-                ),
-                Note(id = UUID.randomUUID().toString(),
-                     title = "My second note",
-                     message = "There is a message for the second note"
-                )
-        )
-    }
+    fun getNotes(): List<Note> = service.getNotes()
 
     /**
      * Insert note. It consumes JSON.
@@ -36,10 +31,7 @@ class NoteController {
     @PutMapping(
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun insertNote(@RequestBody note: Note): Note {
-        note.id = UUID.randomUUID().toString()
-        return note
-    }
+    fun insertNote(@RequestBody note: Note): Note = service.insertNote(note)
 
     /**
      * Delete note by Id
@@ -47,10 +39,7 @@ class NoteController {
     @DeleteMapping(
             value = ["/{id}"],
             produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun deleteNote(@PathVariable(name = "id") id: String): Boolean {
-        print("Removing $id")
-        return true
-    }
+    fun deleteNote(@PathVariable(name = "id") id: String): Boolean = service.deleteNote(id)
 
     /**
      * Update item
@@ -58,10 +47,5 @@ class NoteController {
     @PostMapping(
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun updateNote(@RequestBody note: Note): Note {
-        note.title += " [updated]"
-        note.message += " [updated]"
-        return note
-    }
-
+    fun updateNote(@RequestBody note: Note): Boolean = service.updateNote(note)
 }
