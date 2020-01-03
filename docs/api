@@ -3,6 +3,7 @@
   -H 'Content-Type: application/json'
   http://localhost:9000/notes
 
+
 ### Add note
 curl -k -X PUT
  -H 'Content-Type: application/json'
@@ -12,3 +13,57 @@ curl -k -X PUT
     "message": "New message"
 }'
  http://localhost:9000/notes
+
+
+### Delete note
+ curl -k -X DELETE
+  -H 'Content-Type: application/json'
+ http://localhost:9000/notes/{id}
+
+
+### Update note
+curl -k -X PUT
+ -H 'Content-Type: application/json'
+ -d 
+'{
+    "id": "{id}",
+    "title": "New title updated", 
+    "message": "New message updated"
+}'
+ http://localhost:9000/notes
+
+
+### Todo list
+ curl -k -X GET 
+  -H 'Content-Type: application/json'
+  http://localhost:9000/todos
+
+
+### Add todo
+curl -k -X PUT
+ -H 'Content-Type: application/json'
+ -d 
+'{
+    "title": "New title", 
+    "message": "New message",
+    "schedule": 10800000
+}'
+ http://localhost:9000/todos
+
+
+### Delete todo
+ curl -k -X DELETE
+  -H 'Content-Type: application/json'
+ http://localhost:9000/todos/{id}
+
+
+### Update todo
+curl -k -X PUT
+ -H 'Content-Type: application/json'
+ -d 
+'{
+    "id": "{id}",
+    "title": "New title updated", 
+    "message": "New message updated"
+}'
+ http://localhost:9000/todos
